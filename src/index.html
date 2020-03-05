@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="zh-Hans-TW">
+<head>
+  <title>select2 使用範例</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- bootstrap 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- 國旗css -->
+  <link rel="stylesheet" href="flags.css">
+
+  <!-- jquery  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <!-- select2 -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.js"></script>
+
+
+  <style>
+    pre {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      color: #333;
+      page-break-inside: avoid;
+      line-height: 1.6;
+      margin-top: .75rem;
+      margin-bottom: 0rem;
+      max-width: 100%;
+      overflow: auto;
+      padding: 1rem 1.5rem;
+      width: 100%;
+      display: block;
+      word-wrap: break-word;
+      font-size: 12px;
+    }
+    pre span{
+      color: #f36d33;
+    }
+    .custom-select{
+      width: 100%;
+    }
+    body{
+      padding-bottom: 200px;
+    }
+    .select2-container .select2-selection--multiple{
+      padding-left: 8px;
+    }
+    .s2-flag {
+      margin-right: 8px;
+      border: 1px solid #666;
+    }
+    /* 已被選取的項目 */
+    .select2-container--default .select2-results__option[aria-selected=true]{
+      background-color: #eee;
+      color: #45beb2;
+    }
+     /* hover中的項目 */
+    .select2-container--default .select2-results__option--highlighted[aria-selected]{
+      color: #fff;
+      background-color: #45beb2;
+    }
+  </style>
+</head>
+<body>
+
+<div class="jumbotron text-center">
+  <h2>select2 使用範例</h2>
+</div>
+
+<div class="container " >
+<!-- 單選 -->
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <h5>1.單選</h5>
+      <select class="custom-select js-select2-id1" style="width:100%;">
+        <option >請選擇縣市</option>
+        <option value="01">台北市</option>
+        <option value="02">新北市</option>
+        <option value="03">桃園市</option>
+        <option value="04">台中市</option>
+        <option value="05">高雄市</option>
+        <option value="06">南投市</option>
+        <option value="07">台南市</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-8">
+<pre>
+&lt;select class="js-select2-id1" <span>style="width:100%;</span>>
+  &lt;option>請選擇縣市&lt;/option>
+  &lt;option <span>value="01"</span>>台北市&lt;/option>
+  &lt;option <span>value="02"</span>>新北市&lt;/option>
+  <span>&lt;!-- 注意：value一定要填值 --></span>  
+  ...
+&lt;/select>
+---
+$('.js-select2-id1').select2({
+  <span>language:{
+    "noResults": function () {
+      return "找不到結果";
+    }
+  }</span>
+});
+</pre>
+<pre>
+/* 已被選取的項目 */
+.select2-container--default .select2-results__option[aria-selected=true]{
+  background-color: #eee;
+  color: #45beb2;
+}
+  /* hover中的項目 */
+.select2-container--default .select2-results__option--highlighted[aria-selected]{
+  color: #fff;
+  background-color: #45beb2;
+}
+</pre>
+    </div>
+  </div>
+<!-- 單選 (有placeholder) -->
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <h5 class='mt-3'>2.單選 (有placeholder)</h5>
+      <select class="custom-select js-select2-id2" data-placeholder="請選縣市(可輸入文字)" style="width:100%;">
+        <option></option>
+        <option value="01">台北市</option>
+        <option value="02">新北市</option>
+        <option value="03">桃園市</option>
+        <option value="04">台中市</option>
+        <option value="05">高雄市</option>
+        <option value="06">南投市</option>
+        <option value="07">台南市</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-8">
+<pre>
+&lt;select class="js-select2-id2" <span>data-placeholder="請選縣市(可輸入文字)"</span> style="width:100%;>
+  <span>&lt;option>&lt;/option> 單選+placeholder, 第一個option需為空值</span>
+  &lt;option value="01">台北市&lt;/option>
+...
+&lt;/select
+---
+$('.js-select2-id2').select2({
+  <span>allowClear: true, //可清除</span>
+  language:{
+    "noResults": function () {
+    return "找不到結果";
+    }
+  }
+});</pre>
+
+    </div>
+  </div>
+<!-- 多選 -->
+  <div class="row">
+    <div class="col-12 col-lg-4">
+      <h5 class='mt-3'>3.多選</h5>
+      <select multiple="multiple" class="custom-select js-select2-id3" data-placeholder="請選縣市(可多選)" style="width:100%;">
+        <option value="01">台北市</option>
+        <option value="02">新北市</option>
+        <option value="03">桃園市</option>
+        <option value="04">台中市</option>
+        <option value="05">高雄市</option>
+        <option value="06">南投市</option>
+        <option value="07">台南市</option>
+      </select>
+    </div>
+    <div class="col-12 col-lg-8">
+    <pre>
+&lt;select <span>multiple="multiple"</span> class="js-select2-id3" data-placeholder="請選縣市(可多選)" style="width:100%;>
+  &lt;option value="01">台北市&lt;/option> 
+...
+&lt;/select
+---
+$('.js-select2-id3').select2({
+  allowClear: true, //可清除
+  language:{
+    "noResults": function () {
+      return "找不到結果";
+    }
+  }
+});</pre>
+  
+    </div>
+  </div>
+<!-- 多選 (最多選 N 個) -->
+<div class="row">
+  <div class="col-12 col-lg-4">
+    <h5 class='mt-3'>4.多選 (最多選 N 個)</h5>
+    <select multiple="multiple" class="custom-select js-select2-id4" data-placeholder="請選縣市(最多選3個)" style="width:100%;">
+      <option value="01">台北市</option>
+      <option value="02">新北市</option>
+      <option value="03">桃園市</option>
+      <option value="04">台中市</option>
+      <option value="05">高雄市</option>
+      <option value="06">南投市</option>
+      <option value="07">台南市</option>
+    </select>
+  </div>
+  <div class="col-12 col-lg-8">
+    <pre>
+&lt;select multiple="multiple" class="js-select2-id4" data-placeholder="請選縣市(最多選3個)" style="width:100%;>
+  &lt;option value="01">台北市&lt;/option> 
+...
+&lt;/select
+---
+$('.js-select2-id4').select2({
+  allowClear: true,
+  <span>maximumSelectionLength: 3,</span>
+  language: {
+    <span>"maximumSelected": function (args) {
+      var message = '最多可選 ' + args.maximum + ' 個項目';
+      return message;
+    },</span>
+    "noResults": function () {
+      return "找不到結果";
+    }
+  }  
+});</pre>
+
+  </div>
+</div>
+
+<!-- 多選 (選項中帶圖片格式)-->
+<style></style>
+<div class="row">
+  <div class="col-12 col-lg-4">
+    <h5 class='mt-3'>5.多選 (選項中帶圖片格式)</h5>
+    <select multiple="multiple" class="custom-select js-select2-id5" data-placeholder="請選擇國家(可多選)" style="width:100%;">
+      <optgroup label="Asia">
+        <option value="tw">Taiwan</option>
+        <option value="cn">China</option>
+        <option value="hk">Hong Kong</option>
+        <option value="in">India</option>
+        <option value="kr">Korea, Republic of </option>
+        <option value="jp">Japan</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="at">Austria</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="gb">United Kingdom</option>
+      </optgroup>
+      <optgroup label="Australia and Oceania">
+        <option value="au">Australia</option>
+        <option value="nz">New Zealand</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="col-12 col-lg-8">
+    <pre>
+&lt;select multiple="multiple" class="js-select2-id5" data-placeholder="請選擇國家(可多選)" style="width:100%;>
+  <span>&lt;optgroup label="Asia">
+    &lt;option value="tw">Taiwan&lt;/option>
+    &lt;option value="cn">China&lt;/option>
+        ...
+  &lt;/optgroup></span>
+  ...
+&lt;/select>
+---
+<span>function formateCountry(country) {</span>
+  //country.id-->對應到option value，例如國名代號: tw, cn, hk,.....
+  //country.text-->對應到option text，例如: Taiwan, China, Hong Kong,.....
+  if (!country.id) {
+    return country.text; 
+  }
+  var $country = $(
+    "&lt;img src='flags_blank.gif' class='s2-flag flag flag-" + country.id.toLowerCase() + "' />&lt;span>" + country.text + "&lt;/span>"
+  );
+  //把html碼用$符號包成 html 物件
+  //&lt;img src='flags_blank.gif' class='s2-flag flag flag-tw' />&lt;span>Taiwan&lt;/span>
+  //&lt;img src='flags_blank.gif' class='s2-flag flag flag-cn' />&lt;span>China&lt;/span>
+  return $country;
+}  
+$('.js-select2-id5').select2({
+  <span>templateSelection: formateCountry, //被選中的項目,改為指定的的html碼, 範例請參照 https://select2.org/selections#templating
+  templateResult: formateCountry, //下拉選單的項目,改為指定的的html碼,範例請參照 https://select2.org/dropdown#templating</span>
+  allowClear: true,
+  language: {
+    "noResults": function () {
+      return "找不到結果";
+    }
+  }
+});</pre>
+  </div>
+</div>
+
+<!-- 多選 (全選checkbox)-->
+<!-- <div class="col-12 col-lg-12">
+  <h5 class='mt-3'>6.多選 (全選checkbox)</h5>
+</div> -->
+<div class="row">
+  
+  <div class="col-12 col-lg-4" >
+    <h5 class='mt-3 mb-3'>6.多選 (全選/全不選)</h5>
+    <div class='mb-2' style='width: 100%; display:inline-flex; align-items: center; '>
+      <input type="checkbox" id="js-id6-checkall" style='margin-right: 5px;'><label for="js-id6-checkall" style='margin-bottom:0;'>選擇全部國家</label>
+    </div>
+    <select multiple="multiple" class="custom-select js-select2-id6" data-placeholder="請選擇國家(可多選)" style="width:100%; ">
+      <optgroup label="Asia">
+        <option value="tw">Taiwan</option>
+        <option value="cn">China</option>
+        <option value="hk">Hong Kong</option>
+        <option value="in">India</option>
+        <option value="kr">Korea, Republic of </option>
+        <option value="jp">Japan</option>
+      </optgroup>
+      <optgroup label="Europe">
+        <option value="at">Austria</option>
+        <option value="fr">France</option>
+        <option value="de">Germany</option>
+        <option value="gb">United Kingdom</option>
+      </optgroup>
+      <optgroup label="Australia and Oceania">
+        <option value="au">Australia</option>
+        <option value="nz">New Zealand</option>
+      </optgroup>
+    </select>
+  </div>
+  <div class="col-12 col-lg-8">
+    <pre>
+&lt;input type="checkbox" <span>id="js-id6-checkall"</span> >&lt;label for="js-id6-checkall" >選擇全部國家&lt;/label>
+&lt;select multiple="multiple" <span>class="js-select2-id6"</span> data-placeholder="請選縣市(最多選3個)" style="width:100%;>
+  ...
+&lt;/select
+----      
+$('.js-select2-id6').select2({
+  ...
+});
+$('#js-id6-checkall').on('click', function () {
+  if ($("#js-id6-checkall").is(':checked')) { //改為全選
+    $(".js-select2-id6 option").prop("selected", "selected");
+    $(".js-select2-id6").trigger("change");
+  } else { //改為全不選
+    $(".js-select2-id6 option").prop("selected", "");
+    $(".js-select2-id6").trigger("change");
+  }
+});</pre>
+
+  </div>
+</div>
+
+</body>
+
+<script>
+  
+  function formateCountry(country) {
+    //country.id-->對應到option value，例如國名代號: tw, cn, hk,.....
+    //country.text-->對應到option text，例如: Taiwan, China, Hong Kong,.....
+    if (!country.id) {
+      return country.text; 
+    }
+    var $country = $(
+      "<img src='flags_blank.gif' class='s2-flag flag flag-" + country.id.toLowerCase() + "' /><span>" + country.text + "</span>"
+    );
+    //把html碼用$符號包成 html 物件
+    //<img src='flags_blank.gif' class='s2-flag flag flag-tw' /><span>Taiwan</span>
+    //<img src='flags_blank.gif' class='s2-flag flag flag-cn' /><span>China</span>
+    return $country;
+  }  
+  $(document).ready(function(){
+    $('.js-select2-id5').select2({
+      templateSelection: formateCountry, //被選中的項目,改為指定的的html碼, 範例請參照 https://select2.org/selections#templating
+      templateResult: formateCountry, //下拉選單的項目,改為指定的的html碼,範例請參照 https://select2.org/dropdown#templating
+      allowClear: true,
+      language: {
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+
+    $('.js-select2-id6').select2({
+      templateSelection: formateCountry, 
+      templateResult: formateCountry, 
+      language: {
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+    $('#js-id6-checkall').on('click', function () {
+      if ($("#js-id6-checkall").is(':checked')) { //改為全選
+        $(".js-select2-id6 option").prop("selected", "selected");
+        $(".js-select2-id6").trigger("change");
+      } else { //改為全不選
+        $(".js-select2-id6 option").prop("selected", "");
+        $(".js-select2-id6").trigger("change");
+      }
+    });
+
+
+    $('.js-select2-id1').select2({
+      language:{
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+    $('.js-select2-id2').select2({
+      allowClear: true,
+      language: {
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+    
+    $('.js-select2-id3').select2({
+      allowClear: true,
+      language: {
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+
+    $('.js-select2-id4').select2({
+      allowClear: true,
+      maximumSelectionLength: 3,
+      language: {
+        "maximumSelected": function (args) {
+          var message = '最多可選 ' + args.maximum + ' 個項目';
+          return message;
+        },
+        "noResults": function () {
+          return "找不到結果";
+        }
+      }
+    });
+
+    
+
+  });//document
+  
+</script>
+<!-- S2.define('select2/i18n/en',[],function () {
+  // English
+  return {
+    errorLoading: function () {
+      return 'The results could not be loaded.';
+    },
+    inputTooLong: function (args) {
+      var overChars = args.input.length - args.maximum;
+
+      var message = 'Please delete ' + overChars + ' character';
+
+      if (overChars != 1) {
+        message += 's';
+      }
+
+      return message;
+    },
+    inputTooShort: function (args) {
+      var remainingChars = args.minimum - args.input.length;
+
+      var message = 'Please enter ' + remainingChars + ' or more characters';
+
+      return message;
+    },
+    loadingMore: function () {
+      return 'Loading more results…';
+    },
+    maximumSelected: function (args) {
+      var message = 'You can only select ' + args.maximum + ' item';
+
+      if (args.maximum != 1) {
+        message += 's';
+      }
+
+      return message;
+    },
+    noResults: function () {
+      return 'No results found';
+    },
+    searching: function () {
+      return 'Searching…';
+    },
+    removeAllItems: function () {
+      return 'Remove all items';
+    }
+  };
+}); -->
+
+</html>
