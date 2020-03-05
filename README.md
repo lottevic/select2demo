@@ -66,4 +66,6 @@ $(document).ready(function() {
 ## 線上資源
 
 - [Lotte's Demo Site](https://lottevic.github.io/select2demo/src)
+
+  ![printscreen](images/qr-code.png)
 - [Official Select2 Website](https://select2.org/)
