@@ -4,9 +4,9 @@
 
 
 - [About the Library](#about-the-library)
-- [Image Examples](#image-examples)
+- [示意圖](#示意圖)
 - [Installation](#installation)
-- [單選/多選/檢索功能示意](#basic-usage)  
+- [Basic Usage](#basic-usage)  
 - [線上資源](#%e7%b7%9a%e4%b8%8a%e8%b3%87%e6%ba%90)
 
 <!-- tocstop -->
@@ -22,7 +22,7 @@ Select2 是一款基於jquery開發的下拉選單套件，可以優化select的
 - broser支援度高 (IE 8+ / Chrome 8+ / FF 10+ / Safari 3+...)
 
 
-## Image Examples
+## 示意圖
 
 
 - 單選
