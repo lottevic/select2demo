@@ -2,12 +2,12 @@
 
 <!-- toc -->
 
-- [scrollmagic](#scrollmagic)
-  - [About the Library](#about-the-library)
-  - [Image Examples](#image-examples)
-  - [Installation](#installation)
-  - [單選/多選/檢索功能示意](#basic-usage)  
-  - [線上資源](#%e7%b7%9a%e4%b8%8a%e8%b3%87%e6%ba%90)
+
+- [About the Library](#about-the-library)
+- [Image Examples](#image-examples)
+- [Installation](#installation)
+- [單選/多選/檢索功能示意](#basic-usage)  
+- [線上資源](#%e7%b7%9a%e4%b8%8a%e8%b3%87%e6%ba%90)
 
 <!-- tocstop -->
 
